@@ -9,12 +9,6 @@ This project applies machine learning to identify Parkinson's Disease from the p
 4. Dataset balancing and feature scaling
 5. Training and evaluating multiple machine learning models
 
-## Dataset Details
-
-- Dataset used: Parkinsons Disease Dataset
-- Source: UCI Machine Learning Repository
-- Download URL: https://archive.ics.uci.edu/ml/machine-learning-databases/parkinsons/parkinsons.data
-
 ## Models Trained and Evaluated
 
 The following classifiers were tested in this project:
