@@ -1,5 +1,4 @@
 # Parkinson Disease Detection
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)<br>
 
 This project applies machine learning to identify Parkinson's Disease from the provided dataset. It covers the full workflow from data preparation to model comparison, including:
 
