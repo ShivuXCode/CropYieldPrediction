@@ -1,0 +1,372 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Yield Prediction</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            overflow-x: hidden;
+        }
+
+        .glass-container {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .left-panel {
+            padding: 50px;
+            color: white;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+            position: relative;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #8cffb2;
+        }
+
+        .title {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #d8d8d8;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .feature-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .feature-icon {
+            font-size: 26px;
+        }
+
+        .feature-text h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .feature-text p {
+            font-size: 13px;
+            color: #d8d8d8;
+        }
+
+        .right-panel {
+            padding: 50px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 35px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #334155;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            border: 2px solid #e2e8f0;
+            font-size: 15px;
+            transition: 0.3s;
+            outline: none;
+            background: #f8fafc;
+        }
+
+        input:focus {
+            border-color: #22c55e;
+            background: white;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+        }
+
+        .predict-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.25);
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4);
+        }
+
+        .result-card {
+            margin-top: 35px;
+            padding: 25px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #ecfeff, #dcfce7);
+            border: 1px solid #bbf7d0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .result-title {
+            font-size: 22px;
+            color: #166534;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .result-value {
+            font-size: 36px;
+            color: #15803d;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .weather-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .weather-item {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .weather-item h4 {
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .weather-item p {
+            color: #16a34a;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width: 900px) {
+
+            .glass-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-panel {
+                display: none;
+            }
+
+            .right-panel {
+                padding: 35px 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="glass-container">
+
+        <div class="left-panel">
+
+            <div class="logo">🌾 SmartAgro AI</div>
+
+            <div class="title">
+                Crop Yield Prediction Using AI
+            </div>
+
+            <div class="subtitle">
+                Predict agricultural crop yield using Machine Learning and real-time weather data integration.
+                This intelligent system helps farmers and researchers estimate production more accurately.
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon">🌦️</div>
+                <div class="feature-text">
+                    <h4>Live Weather API</h4>
+                    <p>Fetches real-time temperature and rainfall data automatically.</p>
+                </div>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-text">
+                    <h4>Random Forest ML Model</h4>
+                    <p>Advanced machine learning algorithm trained on crop datasets.</p>
+                </div>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon">📈</div>
+                <div class="feature-text">
+                    <h4>Smart Yield Estimation</h4>
+                    <p>Predicts expected crop production with high accuracy.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="right-panel">
+
+            <div class="form-title">Crop Yield Predictor</div>
+
+            <div class="form-subtitle">
+                Enter agricultural and weather details
+            </div>
+
+            <form action="/predict" method="POST">
+
+                <div class="input-group">
+                    <label>Area / Country</label>
+                    <input type="text" name="area" placeholder="Enter Area" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Crop Name</label>
+                    <input type="text" name="item" placeholder="Example: Rice, paddy" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Year</label>
+                    <input type="number" name="year" placeholder="Enter Year" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Pesticides Tonnes</label>
+                    <input type="number" step="0.01" name="pesticides" placeholder="Enter Pesticides Value" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Rainfall (Optional)</label>
+                    <input type="number" step="0.01" name="rainfall" placeholder="Leave empty to fetch from API">
+                </div>
+
+                <div class="input-group">
+                    <label>City Name</label>
+                    <input type="text" name="city" placeholder="Enter City Name" required>
+                </div>
+
+                <button class="predict-btn" type="submit">
+                    Predict Crop Yield
+                </button>
+
+            </form>
+
+            {% if prediction %}
+
+            <div class="result-card">
+
+                <div class="result-title">
+                    🌱 Predicted Crop Yield
+                </div>
+
+                <div class="result-value">
+                    {{ prediction }} hg/ha
+                </div>
+
+                <div class="weather-box">
+
+                    <div class="weather-item">
+                        <h4>Temperature</h4>
+                        <p>{{ temperature }} °C</p>
+                    </div>
+
+                    <div class="weather-item">
+                        <h4>Rainfall</h4>
+                        <p>{{ rainfall }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```
